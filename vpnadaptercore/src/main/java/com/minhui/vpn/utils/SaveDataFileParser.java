@@ -68,8 +68,9 @@ public class SaveDataFileParser {
             showData.headStr = headBuilder.toString();
 
             if (encodingType != null) {
-                String s = encodingType.toLowerCase();
+                String s = encodingType.trim().toLowerCase();
                 if (s.equals(GZIP)) {
+                    buffer.skip(5);
                     showData.bodyStr = getGzipStr(buffer);
                     return showData;
                 }
@@ -89,7 +90,7 @@ public class SaveDataFileParser {
                     return showData;
                 } else if (contentType.toLowerCase().contains(URLENCODED)) {
                     String readUtf8 = buffer.readUtf8();
-                    showData.bodyStr = URLDecoder.decode(readUtf8);
+                    showData.bodyStr = URLDecoder.decode(readUtf8,"UTF-8");
                     return showData;
                 }
 

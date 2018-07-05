@@ -371,9 +371,7 @@ public class FirewallVpnService extends VpnService implements Runnable {
             udpServer = new UDPServer(this, udpQueue);
             udpServer.start();
             NatSessionManager.clearAllSession();
-            if(PortHostService.getInstance()!=null){
-                PortHostService.startParse(getApplicationContext());
-            }
+            PortHostService.startParse(getApplicationContext());
             DebugLog.i("DnsProxy started.\n");
 
             ProxyConfig.Instance.onVpnStart(this);
